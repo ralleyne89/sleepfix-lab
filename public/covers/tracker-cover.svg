@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Editorial cover illustration for sleep tracker comparison</title>
+  <desc id="desc">A paper-toned abstract composition with circular measurement forms and a quiet data-grid rhythm.</desc>
+  <rect width="1200" height="900" fill="#f6eee2" />
+  <rect x="56" y="56" width="1088" height="788" fill="#fcfaf6" stroke="#1a1715" stroke-opacity=".12" />
+  <g stroke="#1f1b18" stroke-opacity=".08">
+    <line x1="160" y1="178" x2="1040" y2="178" />
+    <line x1="160" y1="256" x2="1040" y2="256" />
+    <line x1="160" y1="334" x2="1040" y2="334" />
+    <line x1="160" y1="412" x2="1040" y2="412" />
+    <line x1="160" y1="490" x2="1040" y2="490" />
+    <line x1="160" y1="568" x2="1040" y2="568" />
+    <line x1="160" y1="646" x2="1040" y2="646" />
+    <line x1="160" y1="724" x2="1040" y2="724" />
+  </g>
+  <circle cx="396" cy="390" r="142" fill="#d6b18d" fill-opacity=".28" stroke="#1f1b18" stroke-opacity=".18" stroke-width="2.5" />
+  <circle cx="396" cy="390" r="82" fill="none" stroke="#1f1b18" stroke-opacity=".32" stroke-width="3" />
+  <circle cx="396" cy="390" r="24" fill="#1f1b18" fill-opacity=".78" />
+  <circle cx="804" cy="460" r="162" fill="#c08d7c" fill-opacity=".18" stroke="#1f1b18" stroke-opacity=".14" stroke-width="2.5" />
+  <circle cx="804" cy="460" r="108" fill="none" stroke="#1f1b18" stroke-opacity=".32" stroke-width="3" />
+  <circle cx="804" cy="460" r="56" fill="none" stroke="#1f1b18" stroke-opacity=".18" stroke-width="2.5" />
+  <path d="M804 352v108l76 40" fill="none" stroke="#1f1b18" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M274 616c65-23 132-35 202-35 104 0 206 27 296 77" fill="none" stroke="#1f1b18" stroke-opacity=".12" stroke-width="2.5" />
+  <path d="M296 650c59-19 120-29 184-29 89 0 176 20 255 58" fill="none" stroke="#1f1b18" stroke-opacity=".08" stroke-width="1.5" />
+  <line x1="200" y1="760" x2="1000" y2="760" stroke="#1a1715" stroke-opacity=".16" stroke-width="2" />
+</svg>

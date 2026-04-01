@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Editorial cover illustration for anti-snoring mouthguards</title>
+  <desc id="desc">A warm paper-toned abstract composition with soft arcs and a sleeping-night motif.</desc>
+  <rect width="1200" height="900" fill="#f4ece1" />
+  <rect x="58" y="58" width="1084" height="784" fill="#fbf7f1" stroke="#1a1715" stroke-opacity=".12" />
+  <path d="M156 638c89-132 232-222 392-222 141 0 259 75 343 177" fill="none" stroke="#1f1b18" stroke-opacity=".9" stroke-width="5" />
+  <path d="M192 668c75-105 197-171 334-171 117 0 224 50 297 134" fill="none" stroke="#b48764" stroke-width="36" stroke-linecap="round" stroke-opacity=".28" />
+  <path d="M276 300c112-70 233-105 362-105 151 0 289 48 397 136" fill="none" stroke="#1f1b18" stroke-opacity=".12" stroke-width="2.5" />
+  <circle cx="278" cy="250" r="72" fill="#d7b38d" fill-opacity=".6" />
+  <circle cx="930" cy="252" r="48" fill="#c08d7c" fill-opacity=".4" />
+  <rect x="252" y="214" width="696" height="370" rx="185" fill="none" stroke="#1f1b18" stroke-width="2.5" stroke-opacity=".26" />
+  <rect x="336" y="284" width="528" height="228" rx="114" fill="none" stroke="#1f1b18" stroke-width="1.5" stroke-opacity=".14" />
+  <path d="M452 356c27 0 49 22 49 49 0 9-2 17-6 24 31 9 58 29 77 56-16-45-2-98 34-129 15-13 33-22 53-26-7-8-12-19-12-31 0-27 22-49 49-49 24 0 44 17 48 40 13-5 27-8 42-8 63 0 114 51 114 114v42H452v-82z" fill="#1c1917" fill-opacity=".08" />
+  <path d="M580 222c0-34 27-61 61-61 34 0 61 27 61 61 0 25-15 47-37 56l-24 49-24-49c-22-9-37-31-37-56z" fill="#1f1b18" fill-opacity=".08" />
+  <line x1="190" y1="716" x2="1010" y2="716" stroke="#1a1715" stroke-opacity=".16" stroke-width="2" />
+  <line x1="190" y1="752" x2="1010" y2="752" stroke="#1a1715" stroke-opacity=".08" stroke-width="1.5" />
+</svg>
