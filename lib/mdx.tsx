@@ -7,6 +7,7 @@ export async function renderArticleMdx(source: string) {
     source,
     components: mdxComponents,
     options: {
+      blockJS: false,
       parseFrontmatter: false,
       mdxOptions: {
         remarkPlugins: [remarkGfm],
