@@ -15,18 +15,18 @@ export function AuthorCard() {
   return (
     <Card className="bg-card/84">
       <CardHeader className="flex flex-col gap-3.5">
-        <p className="text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
           Editorial profile
         </p>
         <div className="flex items-center gap-3.5 sm:gap-4">
-          <Avatar className="size-12 sm:size-14">
+          <Avatar className="size-14 rounded-full border border-[color:var(--ghost-border)] bg-secondary sm:size-16">
             <AvatarFallback>SL</AvatarFallback>
           </Avatar>
           <div className="flex flex-col gap-1">
-            <CardTitle className="text-[1.55rem] tracking-[-0.05em] sm:text-3xl">
+            <CardTitle className="text-[1.7rem] tracking-[-0.06em] sm:text-[2.2rem]">
               {siteConfig.author.name}
             </CardTitle>
-            <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="text-[0.68rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.72rem]">
               {siteConfig.author.role}
             </p>
           </div>
@@ -40,7 +40,7 @@ export function AuthorCard() {
           {siteConfig.author.credentials.map((item) => (
             <Badge
               key={item}
-              className="h-auto max-w-full whitespace-normal px-3 py-1 text-center leading-5 tracking-[0.14em]"
+              className="h-auto max-w-full whitespace-normal px-3 py-1 text-center leading-5 tracking-[0.18em]"
               variant="outline"
             >
               {item}

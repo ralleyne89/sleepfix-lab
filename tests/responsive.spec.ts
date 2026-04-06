@@ -17,6 +17,14 @@ async function expectNoHorizontalOverflow(page: Page) {
   expect(overflow).toBeLessThanOrEqual(1);
 }
 
+async function expectElementNoHorizontalOverflow(page: Page, selector: string) {
+  const overflow = await page.locator(selector).evaluate(
+    (element) => element.scrollWidth - element.clientWidth,
+  );
+
+  expect(overflow).toBeLessThanOrEqual(1);
+}
+
 async function expectFooterFullWidth(page: Page) {
   const footerMetrics = await page.locator("footer").evaluate((element) => {
     const rect = element.getBoundingClientRect();
@@ -69,7 +77,7 @@ for (const viewport of viewports) {
 
       await expectNoHorizontalOverflow(page);
       await expect(page.getByRole("heading", { level: 1, name: "Sleep Products" })).toBeVisible();
-      await expect(page.getByRole("link", { name: /request the next topic/i })).toBeVisible();
+      await expect(page.getByRole("link", { name: /request the next topic/i }).first()).toBeVisible();
       await expect(page.locator("main img").first()).toBeVisible();
 
       const footer = page.locator("footer");
@@ -96,6 +104,18 @@ for (const viewport of viewports) {
 
       await page.getByRole("heading", { name: /related pages inside the same editorial system/i }).scrollIntoViewIfNeeded();
       await expect(page.locator("main img").nth(1)).toBeVisible();
+    });
+
+    test("comparison matrix stays inside the viewport", async ({ page }) => {
+      await gotoAndSettle(page, "/comparisons/oura-ring-vs-fitbit-for-sleep");
+
+      await expectNoHorizontalOverflow(page);
+      await expect(
+        page.getByRole("heading", { level: 1, name: /oura ring vs fitbit for sleep/i }),
+      ).toBeVisible();
+      await expect(page.locator("[data-comparison-table]")).toBeVisible();
+      await expectElementNoHorizontalOverflow(page, "[data-comparison-table]");
+      await expect(page.getByRole("link", { name: "View details" }).first()).toBeVisible();
     });
   });
 }

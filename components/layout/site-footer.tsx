@@ -12,20 +12,20 @@ import { mainNav, siteConfig, utilityNav } from "@/lib/site-config";
 export function SiteFooter() {
   return (
     <footer className="site-footer-band mt-[var(--section-gap)] pb-6 lg:pb-10">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-5 sm:py-9 lg:px-8 lg:py-10">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-start">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-2.5">
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(246,239,228,0.7)]">
+      <div className="mx-auto max-w-[88rem] px-4 py-10 sm:px-5 sm:py-11 lg:px-8 lg:py-14">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,25rem)] lg:items-start">
+          <div className="flex flex-col gap-7">
+            <div className="flex flex-col gap-3">
+              <p className="text-[0.68rem] uppercase tracking-[0.22em] text-[rgba(246,239,228,0.7)]">
                 {siteConfig.publicationNote}
               </p>
-              <h2 className="font-serif text-3xl tracking-[-0.08em] text-[rgba(250,245,237,0.98)] sm:text-[2.8rem]">
+              <h2 className="font-serif text-4xl tracking-[-0.08em] text-[rgba(250,245,237,0.98)] sm:text-[3.2rem]">
                 {siteConfig.name}
               </h2>
               <p className="text-[0.72rem] uppercase tracking-[0.2em] text-[rgba(246,239,228,0.64)]">
                 {siteConfig.tagline}
               </p>
-              <p className="max-w-2xl text-sm leading-7 text-[rgba(240,232,220,0.78)] sm:text-base">
+              <p className="max-w-2xl text-sm leading-7 text-[rgba(240,232,220,0.78)] sm:text-base sm:leading-8">
                 Sleep advice with editorial restraint, practical trade-offs, and a calmer tone than most wellness media.
               </p>
             </div>
@@ -35,14 +35,14 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 border-t border-white/10 pt-5 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
-            <p className="text-[0.68rem] uppercase tracking-[0.18em] text-[rgba(246,239,228,0.7)]">
+          <div className="flex flex-col gap-4 border-t border-white/10 pt-5 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
+            <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[rgba(246,239,228,0.7)]">
               Contact
             </p>
-            <h3 className="font-serif text-[1.65rem] font-semibold tracking-[-0.05em] text-[rgba(250,245,237,0.98)] sm:text-[1.9rem]">
+            <h3 className="font-serif text-[1.9rem] font-semibold tracking-[-0.06em] text-[rgba(250,245,237,0.98)] sm:text-[2.35rem]">
               Reach the editorial desk.
             </h3>
-            <p className="text-sm leading-7 text-[rgba(240,232,220,0.76)]">
+            <p className="text-sm leading-7 text-[rgba(240,232,220,0.76)] sm:text-base sm:leading-8">
               We answer launch feedback, topic suggestions, and editorial-fit partnerships within two business days.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -62,7 +62,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-8 hidden border-t border-white/10 pt-6 lg:grid lg:grid-cols-3 lg:gap-8">
+        <div className="mt-10 hidden border-t border-white/10 pt-8 lg:grid lg:grid-cols-3 lg:gap-10">
           <FooterColumn items={mainNav.slice(1)} muted title="Sections" />
           <FooterColumn items={utilityNav} muted title="Desk notes" />
           <div className="flex flex-col gap-3">
@@ -75,7 +75,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-6 lg:hidden">
+        <div className="mt-10 border-t border-white/10 pt-6 lg:hidden">
           <Accordion collapsible type="single">
             <AccordionItem value="sections">
               <AccordionTrigger className="text-[0.72rem] uppercase tracking-[0.18em] text-[rgba(246,239,228,0.74)]">

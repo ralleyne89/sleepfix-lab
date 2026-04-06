@@ -17,7 +17,7 @@ export function UtilityPageShell({
 }: UtilityPageShellProps) {
   return (
     <div className="page-shell">
-      <div className="paper-panel mx-auto max-w-4xl rounded-[1.5rem] border-border/70 px-4 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-8">
+      <div className="paper-panel mx-auto max-w-4xl rounded-[2.4rem] px-5 py-5 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
         <SectionHeading
           as="h1"
           body={description}
@@ -26,7 +26,7 @@ export function UtilityPageShell({
           title={title}
         />
         <Separator />
-        <div className="pt-5 sm:pt-6 lg:pt-8">{children}</div>
+        <div className="pt-6 sm:pt-7 lg:pt-9">{children}</div>
       </div>
     </div>
   );

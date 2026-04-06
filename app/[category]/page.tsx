@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { LeadStory } from "@/components/shared/lead-story";
 import { NewsletterCard } from "@/components/shared/newsletter-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { StoryCard } from "@/components/shared/story-card";
+import { StoryVisual } from "@/components/shared/story-visual";
 import { getAllArticles, getArticlesByCategory, getCategoryStaticParams } from "@/lib/content";
 import { buildCategoryMetadata } from "@/lib/seo";
 import { categoryMeta, isArticleCategory, siteConfig } from "@/lib/site-config";
@@ -58,25 +58,87 @@ export default async function CategoryPage({
   return (
     <div className="pb-16 sm:pb-20 lg:pb-24">
       <div className="page-shell">
-        <section className="motion-enter max-w-[42rem] space-y-3 sm:space-y-4">
-          <p className="eyebrow">Section front</p>
-          <h1 className="font-serif text-[2.1rem] font-semibold leading-[0.96] tracking-[-0.07em] text-balance sm:text-[3.25rem] lg:text-[3.8rem]">
-            {meta.title}
-          </h1>
-          <p className="section-copy text-[1.02rem] leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-            {meta.description}
-          </p>
-          <div className="flex flex-wrap gap-2.5 text-sm leading-6 text-muted-foreground sm:gap-3">
-            <span className="rounded-full border border-border/70 bg-background/76 px-3 py-1.5">
-              {articles.length} live article{articles.length === 1 ? "" : "s"}
-            </span>
-            <span className="rounded-full border border-border/70 bg-background/76 px-3 py-1.5">
-              {meta.focus}
-            </span>
+        <section className="hero-glow motion-enter grid gap-8 lg:grid-cols-[minmax(0,1.02fr)_minmax(18rem,25rem)] lg:items-center">
+          <div className="flex min-w-0 flex-col gap-5">
+            <p className="eyebrow">Section front</p>
+            <h1 className="font-serif text-[clamp(2.4rem,8vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.08em] text-balance">
+              {meta.title}
+            </h1>
+            <p className="section-copy text-[1rem] leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+              {meta.description}
+            </p>
+            <div className="flex flex-wrap gap-2.5 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground sm:gap-3">
+              <span className="rounded-full border border-[color:var(--ghost-border)] bg-white/76 px-3 py-1.5">
+                {articles.length} live article{articles.length === 1 ? "" : "s"}
+              </span>
+              <span className="rounded-full border border-[color:var(--ghost-border)] bg-white/76 px-3 py-1.5">
+                {meta.focus}
+              </span>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {leadArticle ? (
+                <Button asChild size="lg">
+                  <Link href={leadArticle.url}>
+                    Read the featured guide
+                    <ArrowRightIcon data-icon="inline-end" />
+                  </Link>
+                </Button>
+              ) : null}
+              <Button asChild size="lg" variant="outline">
+                <Link href="/contact">Request the next topic</Link>
+              </Button>
+            </div>
           </div>
-        </section>
 
-        {leadArticle ? <LeadStory article={leadArticle} label="Featured in this section" /> : null}
+          <aside className="paper-panel flex min-w-0 flex-col gap-5 rounded-[2.3rem] p-4 sm:p-5 lg:p-6">
+            {leadArticle ? (
+              <>
+                <Link className="block min-w-0" href={leadArticle.url}>
+                  <StoryVisual article={leadArticle} className="w-full" priority variant="row" />
+                </Link>
+                <div className="flex flex-col gap-3">
+                  <p className="eyebrow">Featured in this section</p>
+                  <h2 className="font-serif text-[1.75rem] font-medium leading-[0.98] tracking-[-0.06em] text-balance sm:text-[2.2rem]">
+                    {leadArticle.title}
+                  </h2>
+                  <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                    {leadArticle.excerpt}
+                  </p>
+                </div>
+                <Button asChild className="w-fit" size="sm">
+                  <Link href={leadArticle.url}>
+                    Open featured article
+                    <ArrowRightIcon data-icon="inline-end" />
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <>
+                <div className="relative overflow-hidden rounded-[2rem] border border-[color:var(--ghost-border)] bg-[color:var(--surface-strong)] shadow-[0_18px_40px_rgba(27,28,25,0.07)]">
+                  <div className="relative aspect-[4/3]">
+                    <Image
+                      alt={meta.teaserAlt}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 28rem, 100vw"
+                      src={meta.teaserImage}
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),transparent_36%,rgba(21,20,18,0.48))]" />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <p className="eyebrow">What is coming next</p>
+                  <h2 className="font-serif text-[1.75rem] font-medium leading-[0.98] tracking-[-0.06em] text-balance sm:text-[2.2rem]">
+                    The editorial frame is live, and the next additions can drop in cleanly.
+                  </h2>
+                  <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                    Use the launch ideas below as the next publishing sequence without changing the new front-page rhythm.
+                  </p>
+                </div>
+              </>
+            )}
+          </aside>
+        </section>
 
         <section className="section-block">
           <Separator className="section-divider" />
@@ -87,9 +149,9 @@ export default async function CategoryPage({
                 eyebrow="Published now"
                 title="More reads in this section."
               />
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                 {remainingArticles.map((article) => (
-                  <StoryCard key={article.url} article={article} />
+                  <StoryCard key={article.url} article={article} visual="thumb" />
                 ))}
               </div>
             </div>
@@ -104,8 +166,8 @@ export default async function CategoryPage({
                 eyebrow="On deck"
                 title="The next likely stories for this section."
               />
-              <div className="grid gap-5 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] md:items-start">
-                <div className="relative overflow-hidden rounded-[1.6rem] border border-border/70 bg-[color:var(--night)] shadow-[0_18px_40px_rgba(24,22,19,0.12)]">
+              <div className="grid gap-6 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] md:items-start">
+                <div className="relative overflow-hidden rounded-[2rem] border border-[color:var(--ghost-border)] bg-[color:var(--surface-strong)] shadow-[0_18px_40px_rgba(27,28,25,0.07)]">
                   <div className="relative aspect-[4/3]">
                     <Image
                       alt={meta.teaserAlt}
@@ -114,14 +176,14 @@ export default async function CategoryPage({
                       sizes="(min-width: 768px) 28rem, 100vw"
                       src={meta.teaserImage}
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,246,240,0.08),transparent_36%,rgba(16,20,28,0.56))]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.1),transparent_36%,rgba(16,18,21,0.52))]" />
                   </div>
                 </div>
-                <div className="paper-panel rounded-[1.45rem] border-border/70 p-4 sm:rounded-[1.6rem] sm:p-6">
+                <div className="paper-panel rounded-[2rem] p-5 sm:p-6">
                   <div className="grid gap-3">
                     {meta.launchIdeas.map((idea) => (
-                      <div key={idea} className="border-t border-border/70 pt-3 first:border-t-0 first:pt-0">
-                        <p className="font-serif text-[1.2rem] font-semibold tracking-[-0.04em] text-foreground sm:text-[1.45rem]">
+                      <div key={idea} className="rounded-[1.35rem] bg-secondary/72 px-4 py-3">
+                        <p className="font-serif text-[1.2rem] font-medium tracking-[-0.05em] text-foreground sm:text-[1.45rem]">
                           {idea}
                         </p>
                       </div>
@@ -156,7 +218,7 @@ export default async function CategoryPage({
             </div>
             <div className="min-w-0 space-y-3.5 sm:space-y-4">
               <NewsletterCard compact />
-              <Alert className="border-border/70 bg-background/76">
+              <Alert className="border-[color:var(--ghost-border)] bg-white/78">
                 <CircleAlertIcon />
                 <AlertTitle>Trust notes</AlertTitle>
                 <AlertDescription>

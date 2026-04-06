@@ -41,15 +41,15 @@ export function AffiliateCTA({
             <Badge variant="outline">{product.badge}</Badge>
             <Badge variant="outline">{product.priceLabel}</Badge>
           </div>
-          <CardTitle className="text-2xl tracking-[-0.05em] sm:text-3xl">
+          <CardTitle className="text-[1.9rem] tracking-[-0.06em] sm:text-[2.6rem]">
             {product.name}
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-5">
           <p className="max-w-2xl leading-8 text-muted-foreground">{product.summary}</p>
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {product.pros.map((pro) => (
-              <Alert key={pro}>
+              <Alert key={pro} className="bg-secondary/78 shadow-none">
                 <CircleAlertIcon />
                 <AlertTitle>Why it earns a look</AlertTitle>
                 <AlertDescription>{pro}</AlertDescription>
@@ -68,7 +68,7 @@ export function AffiliateCTA({
               <ArrowRightIcon data-icon="inline-end" />
             </a>
           </Button>
-          <p className="text-xs leading-6 text-muted-foreground">{product.disclaimer}</p>
+          <p className="max-w-sm text-xs leading-6 text-muted-foreground">{product.disclaimer}</p>
         </CardFooter>
       </Card>
     </aside>

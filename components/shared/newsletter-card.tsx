@@ -34,17 +34,17 @@ export function NewsletterCard({
     process.env.BEEHIIV_SUBSCRIBE_URL;
 
   const titleClassName = cn(
-    "max-w-3xl font-serif tracking-[-0.065em] text-balance text-foreground",
+    "max-w-3xl font-serif tracking-[-0.075em] text-balance text-foreground",
     compact
-      ? "text-[1.35rem] leading-[1.02] sm:text-[1.75rem]"
+      ? "text-[1.45rem] leading-[1] sm:text-[1.95rem]"
       : variant === "plain"
-        ? "text-[1.85rem] leading-[0.98] sm:text-[2.8rem]"
-        : "text-[1.6rem] leading-[1] sm:text-[2.45rem]",
+        ? "text-[2.05rem] leading-[0.95] sm:text-[3.1rem]"
+        : "text-[1.8rem] leading-[0.98] sm:text-[2.7rem]",
   );
 
   const descriptionClassName = cn(
-    "max-w-2xl text-sm leading-6 text-pretty text-muted-foreground",
-    compact ? "sm:text-[0.98rem] sm:leading-6" : "sm:text-base sm:leading-7",
+    "max-w-2xl text-sm leading-7 text-pretty text-muted-foreground",
+    compact ? "sm:text-[0.98rem] sm:leading-7" : "sm:text-base sm:leading-8",
   );
 
   const form = subscribeUrl ? (
@@ -63,7 +63,7 @@ export function NewsletterCard({
             aria-label="Email address"
             id={`${id}-email`}
             name="email"
-            className="h-10 rounded-full border-border/80 bg-white/78 px-4 sm:h-11 sm:px-5"
+            className="h-11 rounded-full border-[color:var(--ghost-border)] bg-white/84 px-5"
             placeholder="Email address"
             required
             type="email"
@@ -76,7 +76,7 @@ export function NewsletterCard({
       </Button>
     </form>
   ) : (
-    <Alert className={cn("border-border/70 bg-secondary/58", variant === "plain" ? "bg-background/72" : "")}>
+    <Alert className={cn("border-[color:var(--ghost-border)] bg-secondary/72", variant === "plain" ? "bg-white/78" : "")}>
       <CircleAlertIcon />
       <AlertTitle>Provider-ready newsletter</AlertTitle>
       <AlertDescription>
@@ -114,7 +114,7 @@ export function NewsletterCard({
     <Card
       id={id}
       className={cn(
-        "paper-panel border-border/70",
+        "paper-panel",
         compact ? "gap-4" : "gap-5",
       )}
     >

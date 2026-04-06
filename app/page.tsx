@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { LeadStory } from "@/components/shared/lead-story";
 import { NewsletterCard } from "@/components/shared/newsletter-card";
 import { StoryCard } from "@/components/shared/story-card";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -153,22 +152,74 @@ export default function HomePage() {
           </aside>
         </section>
 
-        <LeadStory article={leadArticle} label="Featured reading" />
-
         <section className="section-block">
           <Separator className="section-divider" />
-          <div className="grid gap-6">
-            <SectionHeading
-              body={
-                "These pieces move from products into habits, measurement, and longer-term sleep trade-offs without slowing the editorial pace."
-              }
-              eyebrow="Also on the desk"
-              title="Companion reads that widen the frame."
-            />
-            <div className="grid gap-8 lg:grid-cols-2">
-              {secondaryArticles.map((article) => (
-                <StoryCard key={article.url} article={article} />
-              ))}
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-start">
+            <article className="paper-panel overflow-hidden rounded-[2.5rem]">
+              <div className="grid gap-0 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+                <Link
+                  className="block min-w-0 border-b border-[color:var(--ghost-border)] p-3.5 sm:p-5 xl:border-r xl:border-b-0"
+                  href={leadArticle.url}
+                >
+                  <StoryVisual article={leadArticle} className="w-full" priority variant="lead" />
+                </Link>
+                <div className="flex min-w-0 flex-col gap-5 p-5 sm:gap-6 sm:p-7 xl:p-8">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
+                    <span>Current edition</span>
+                    <span className="h-1 w-1 rounded-full bg-border" />
+                    <span>Featured reading</span>
+                    <span className="h-1 w-1 rounded-full bg-border" />
+                    <span>{leadArticle.readingMinutes} min read</span>
+                  </div>
+                  <div className="space-y-3">
+                    <h2 className="max-w-3xl font-serif text-[2rem] font-medium leading-[0.95] tracking-[-0.08em] text-balance text-foreground sm:text-[2.8rem]">
+                      <Link className="transition hover:text-primary" href={leadArticle.url}>
+                        {leadArticle.title}
+                      </Link>
+                    </h2>
+                    <p className="max-w-2xl text-sm leading-7 text-muted-foreground text-pretty sm:text-base sm:leading-8">
+                      {leadArticle.excerpt}
+                    </p>
+                  </div>
+                  <div className="rounded-[1.6rem] bg-secondary/82 px-5 py-4">
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
+                      Desk angle
+                    </p>
+                    <p className="mt-2 font-serif text-[1.2rem] font-medium leading-[1.14] tracking-[-0.045em] text-foreground sm:text-[1.5rem]">
+                      {leadArticle.hero.mood}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex flex-col gap-3 border-t border-[color:var(--ghost-border)] pt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
+                        Updated
+                      </span>
+                      <span className="text-sm text-foreground">{formatDate(leadArticle.updatedAt)}</span>
+                    </div>
+                    <Button asChild className="w-full justify-center sm:w-auto">
+                      <Link href={leadArticle.url}>
+                        Read the feature
+                        <ArrowRightIcon data-icon="inline-end" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <div className="grid gap-6">
+              <SectionHeading
+                body={
+                  "These pieces move from products into habits, measurement, and longer-term sleep trade-offs without losing the slower editorial pace."
+                }
+                eyebrow="Also on the desk"
+                title="Companion reads that widen the frame."
+              />
+              <div className="grid gap-8">
+                {secondaryArticles.map((article) => (
+                  <StoryCard key={article.url} article={article} visual="thumb" />
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -177,9 +228,7 @@ export default function HomePage() {
           <Separator className="section-divider" />
           <div className="grid gap-6">
             <SectionHeading
-              body={
-                "Every section is designed to widen the reader&apos;s decision instead of repeating the same promo card with different copy."
-              }
+              body="Each front keeps the same editorial rhythm while changing the emphasis, so readers can move from one problem space to the next without feeling like the site resets."
               eyebrow="Browse the journal"
               title="Reading tracks built around real sleep decisions."
             />

@@ -47,19 +47,19 @@ export function StoryRow({
         </Link>
       ) : null}
       <div className="flex min-w-0 flex-col gap-3 sm:gap-4">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
           {showCategory ? <span>{category.title}</span> : null}
           {showCategory ? <span className="h-1 w-1 rounded-full bg-border" /> : null}
-          <span className="text-[0.68rem] uppercase tracking-[0.16em] text-muted-foreground sm:text-[0.72rem]">
+          <span className="text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.66rem]">
             {article.readingMinutes} min read
           </span>
         </div>
         <h3
           className={cn(
-            "max-w-4xl font-serif font-semibold leading-[1.02] tracking-[-0.055em] text-balance",
+            "max-w-4xl font-serif font-medium leading-[1.02] tracking-[-0.06em] text-balance text-foreground",
             titleSize === "large"
-              ? "text-[1.55rem] sm:text-[2.15rem] lg:text-[2.45rem]"
-              : "text-[1.28rem] sm:text-[1.65rem]",
+              ? "text-[1.7rem] sm:text-[2.3rem] lg:text-[2.7rem]"
+              : "text-[1.35rem] sm:text-[1.8rem]",
           )}
         >
           <Link className="transition hover:text-primary" href={article.url}>
@@ -67,7 +67,7 @@ export function StoryRow({
           </Link>
         </h3>
         {showExcerpt ? (
-          <p className="max-w-2xl text-sm leading-6 text-muted-foreground text-pretty sm:text-base sm:leading-7">
+          <p className="max-w-2xl text-sm leading-7 text-muted-foreground text-pretty sm:text-base sm:leading-8">
             {article.excerpt}
           </p>
         ) : null}

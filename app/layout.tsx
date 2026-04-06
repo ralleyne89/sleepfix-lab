@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+import { Newsreader, Work_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/lib/site-config";
@@ -12,16 +12,10 @@ const newsreader = Newsreader({
   weight: ["400", "500", "600", "700"],
 });
 
-const plexSans = IBM_Plex_Sans({
-  variable: "--font-plex-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -60,13 +54,12 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       className={cn(
-        "h-full antialiased",
+        "h-full bg-background text-foreground antialiased",
         newsreader.variable,
-        plexSans.variable,
-        plexMono.variable,
+        workSans.variable,
       )}
     >
-      <body className="site-grid min-h-full">
+      <body className="site-grid min-h-full font-sans text-foreground">
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
           <main className="flex-1">{children}</main>

@@ -26,7 +26,12 @@ import { NewsletterCard } from "@/components/shared/newsletter-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { StoryCard } from "@/components/shared/story-card";
 import { StoryVisual } from "@/components/shared/story-visual";
-import { getArticleBySlug, getArticleStaticParams, getRelatedArticles } from "@/lib/content";
+import {
+  getArticleBySlug,
+  getArticleStaticParams,
+  getFeaturedProducts,
+  getRelatedArticles,
+} from "@/lib/content";
 import { renderArticleMdx } from "@/lib/mdx";
 import {
   buildArticleJsonLd,
@@ -35,7 +40,7 @@ import {
   buildFaqJsonLd,
 } from "@/lib/seo";
 import { categoryMeta, isArticleCategory, siteConfig } from "@/lib/site-config";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 
 export const dynamicParams = false;
 
@@ -77,6 +82,8 @@ export default async function ArticlePage({
 
   const renderedContent = await renderArticleMdx(article.content);
   const relatedArticles = getRelatedArticles(article);
+  const featuredProducts = getFeaturedProducts(article.featuredProductIds);
+  const isComparisonArticle = article.category === "comparisons";
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "Home", path: "/" },
     { name: categoryMeta[article.category].title, path: `/${article.category}` },
@@ -111,49 +118,132 @@ export default async function ArticlePage({
             </BreadcrumbList>
           </Breadcrumb>
 
-          <header className="motion-enter mt-4 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(17rem,20rem)] lg:items-start">
-            <div className="flex min-w-0 flex-col gap-4 sm:gap-5">
-              <p className="eyebrow">{article.hero.eyebrow}</p>
-              <h1 className="font-serif text-[2.1rem] font-semibold leading-[0.95] tracking-[-0.07em] text-balance sm:text-[3.2rem] lg:text-[3.8rem]">
-                {article.title}
-              </h1>
-              <p className="max-w-3xl text-sm leading-7 text-muted-foreground text-pretty sm:text-lg sm:leading-8">{article.excerpt}</p>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="secondary">{categoryMeta[article.category].title}</Badge>
-                <Badge variant="outline">{article.readingMinutes} min read</Badge>
-                <span className="hidden text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground sm:inline">
-                  Updated {formatDate(article.updatedAt)}
-                </span>
+          {isComparisonArticle ? (
+            <header className="motion-enter mt-6 space-y-8">
+              <div className="mx-auto max-w-5xl space-y-5 text-center">
+                <p className="eyebrow">{article.hero.eyebrow}</p>
+                <h1 className="font-serif text-[clamp(2.4rem,8vw,5.8rem)] font-medium leading-[0.92] tracking-[-0.08em] text-balance">
+                  {article.title}
+                </h1>
+                <p className="mx-auto max-w-3xl font-serif text-[1.1rem] italic leading-8 tracking-[-0.03em] text-muted-foreground sm:text-[1.45rem] sm:leading-9">
+                  {article.excerpt}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <Badge variant="secondary">{categoryMeta[article.category].title}</Badge>
+                  <Badge variant="outline">{article.readingMinutes} min read</Badge>
+                  <Badge variant="outline">Updated {formatDate(article.updatedAt)}</Badge>
+                </div>
               </div>
-              <Alert>
-                <AlertTitle>{article.hero.accent}</AlertTitle>
-                <AlertDescription>{article.hero.mood}</AlertDescription>
-              </Alert>
-            </div>
 
-            <div>
-              <StoryVisual article={article} priority variant="lead" />
-            </div>
-          </header>
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)] lg:items-start">
+                <div className="paper-panel rounded-[2.5rem] p-4 sm:p-5">
+                  <StoryVisual article={article} priority variant="lead" />
+                </div>
+                <div className="paper-panel flex min-w-0 flex-col gap-5 rounded-[2.3rem] p-5 sm:p-6">
+                  <div className="flex flex-col gap-3">
+                    <p className="eyebrow">Performance matrix</p>
+                    <h2 className="font-serif text-[1.65rem] font-medium leading-[0.98] tracking-[-0.06em] text-balance sm:text-[2rem]">
+                      {article.hero.accent}
+                    </h2>
+                    <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                      {article.hero.mood}
+                    </p>
+                  </div>
+                  <div className="grid gap-3">
+                    {featuredProducts.map((product) => (
+                      <div
+                        key={product.id}
+                        className="rounded-[1.45rem] bg-secondary/78 px-4 py-4"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="font-serif text-[1.2rem] font-medium tracking-[-0.05em] text-foreground">
+                            {product.name}
+                          </p>
+                          <Badge variant="outline">{product.priceLabel}</Badge>
+                        </div>
+                        <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                          {product.summary}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </header>
+          ) : (
+            <header className="motion-enter mt-6 space-y-8">
+              <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 text-center">
+                <p className="eyebrow">{article.hero.eyebrow}</p>
+                <h1 className="font-serif text-[clamp(2.4rem,8vw,5.2rem)] font-medium leading-[0.92] tracking-[-0.08em] text-balance">
+                  {article.title}
+                </h1>
+                <p className="max-w-3xl font-serif text-[1.05rem] italic leading-8 tracking-[-0.03em] text-muted-foreground sm:text-[1.35rem] sm:leading-9">
+                  {article.excerpt}
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <Badge variant="secondary">{categoryMeta[article.category].title}</Badge>
+                  <Badge variant="outline">{article.readingMinutes} min read</Badge>
+                  <Badge variant="outline">Updated {formatDate(article.updatedAt)}</Badge>
+                </div>
+                <Alert className="w-full max-w-3xl text-left">
+                  <AlertTitle>{article.hero.accent}</AlertTitle>
+                  <AlertDescription>{article.hero.mood}</AlertDescription>
+                </Alert>
+              </div>
+
+              <div className="mx-auto max-w-[78rem]">
+                <StoryVisual article={article} priority variant="lead" />
+              </div>
+            </header>
+          )}
 
           <div className="section-block">
             <Separator className="section-divider" />
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,18rem)] lg:items-start">
-              <div className="flex min-w-0 flex-col gap-5 sm:gap-6">
-                <Alert>
-                  <CircleAlertIcon />
-                  <AlertTitle>Affiliate disclosure</AlertTitle>
-                  <AlertDescription>
-                    {siteConfig.legal.affiliate}
-                  </AlertDescription>
-                </Alert>
-                <article className="article-prose">{renderedContent}</article>
-              </div>
+            <div
+              className={cn(
+                "grid gap-6 sm:gap-8 lg:gap-10",
+                isComparisonArticle
+                  ? "lg:grid-cols-[minmax(0,1fr)_minmax(16rem,18rem)] lg:items-start"
+                  : "lg:grid-cols-[minmax(15rem,18rem)_minmax(0,1fr)] lg:items-start",
+              )}
+            >
+              {isComparisonArticle ? (
+                <>
+                  <div className="flex min-w-0 flex-col gap-5 sm:gap-6">
+                    <Alert className="bg-secondary/76">
+                      <CircleAlertIcon />
+                      <AlertTitle>Affiliate disclosure</AlertTitle>
+                      <AlertDescription>
+                        {siteConfig.legal.affiliate}
+                      </AlertDescription>
+                    </Alert>
+                    <article className="article-prose">{renderedContent}</article>
+                  </div>
 
-              <aside className="flex min-w-0 flex-col gap-4 sm:gap-5 lg:sticky lg:top-28 lg:self-start">
-                <Toc headings={article.headings} />
-                <NewsletterCard compact />
-              </aside>
+                  <aside className="flex min-w-0 flex-col gap-4 sm:gap-5 lg:sticky lg:top-28 lg:self-start">
+                    <Toc headings={article.headings} />
+                    <NewsletterCard compact />
+                  </aside>
+                </>
+              ) : (
+                <>
+                  <aside className="order-2 flex min-w-0 flex-col gap-4 sm:gap-5 lg:order-1 lg:sticky lg:top-28 lg:self-start">
+                    <Toc headings={article.headings} />
+                    <NewsletterCard compact />
+                  </aside>
+
+                  <div className="order-1 flex min-w-0 flex-col gap-5 sm:gap-6 lg:order-2">
+                    <Alert>
+                      <CircleAlertIcon />
+                      <AlertTitle>Affiliate disclosure</AlertTitle>
+                      <AlertDescription>
+                        {siteConfig.legal.affiliate}
+                      </AlertDescription>
+                    </Alert>
+                    <article className="article-prose">{renderedContent}</article>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -168,7 +258,7 @@ export default async function ArticlePage({
                 <FaqList items={article.faq} />
               </div>
               <div className="flex min-w-0 flex-col gap-5 sm:gap-6">
-                <div className="paper-panel rounded-[1.45rem] border-border/70 p-4 sm:rounded-[1.6rem] sm:p-5">
+                <div className="paper-panel rounded-[2rem] p-5 sm:p-6">
                   <SectionHeading
                     eyebrow="Sources"
                     size="compact"

@@ -27,17 +27,17 @@ export function StoryCard({
         <StoryVisual article={article} className="w-full" variant={visual} />
       </Link>
       <div className="flex min-w-0 flex-col gap-3">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.62rem] uppercase tracking-[0.22em] text-muted-foreground">
           {showCategory ? <span>{category.title}</span> : null}
           {showCategory ? <span className="h-1 w-1 rounded-full bg-border" /> : null}
           <span>{article.readingMinutes} min read</span>
         </div>
-        <h3 className="max-w-2xl font-serif text-[1.45rem] font-semibold leading-[1.02] tracking-[-0.055em] text-balance text-foreground sm:text-[1.85rem]">
+        <h3 className="max-w-2xl font-serif text-[1.6rem] font-medium leading-[1.02] tracking-[-0.06em] text-balance text-foreground sm:text-[2.05rem]">
           <Link className="transition hover:text-primary" href={article.url}>
             {article.title}
           </Link>
         </h3>
-        <p className="max-w-2xl text-sm leading-6 text-muted-foreground text-pretty sm:text-base sm:leading-7">
+        <p className="max-w-2xl text-sm leading-7 text-muted-foreground text-pretty sm:text-base sm:leading-8">
           {article.excerpt}
         </p>
         <Button asChild className="w-fit px-0" size="sm" variant="link">
