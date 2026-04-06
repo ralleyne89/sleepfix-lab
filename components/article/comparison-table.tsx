@@ -43,59 +43,117 @@ export function ComparisonTable({
           launch.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="px-4 py-4">Product</TableHead>
-              <TableHead className="px-4 py-4">Best for</TableHead>
-              <TableHead className="px-4 py-4">Trade-offs</TableHead>
-              <TableHead className="px-4 py-4">Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {products.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell className="px-4 py-5 align-top whitespace-normal">
-                  <div className="flex flex-col gap-3">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge variant="secondary">{product.badge}</Badge>
-                      <Badge variant="outline">{product.priceLabel}</Badge>
-                    </div>
-                    <p className="font-medium text-foreground">{product.name}</p>
-                    <p className="leading-6 text-muted-foreground">{product.summary}</p>
+      <CardContent className="px-4 pb-4 sm:px-5 sm:pb-5">
+        <div className="grid gap-4 md:hidden">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="rounded-[1.15rem] border border-border/70 bg-background/72 p-3.5"
+            >
+              <div className="flex flex-col gap-3.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary">{product.badge}</Badge>
+                  <Badge variant="outline">{product.priceLabel}</Badge>
+                </div>
+                <div className="space-y-1.5">
+                  <p className="font-medium text-foreground">{product.name}</p>
+                  <p className="text-sm leading-6 text-muted-foreground">{product.summary}</p>
+                </div>
+                <div className="grid gap-3.5">
+                  <div className="space-y-2">
+                    <p className="text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+                      Best for
+                    </p>
+                    <ul className="grid gap-2 pl-4 text-sm leading-6 text-muted-foreground">
+                      {product.pros.map((pro) => (
+                        <li key={pro} className="list-disc">
+                          {pro}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </TableCell>
-                <TableCell className="px-4 py-5 align-top whitespace-normal text-muted-foreground">
-                  <ul className="flex flex-col gap-2">
-                    {product.pros.map((pro) => (
-                      <li key={pro}>{pro}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-                <TableCell className="px-4 py-5 align-top whitespace-normal text-muted-foreground">
-                  <ul className="flex flex-col gap-2">
-                    {product.cons.map((con) => (
-                      <li key={con}>{con}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-                <TableCell className="px-4 py-5 align-top whitespace-normal">
-                  <Button asChild size="sm" variant="outline">
-                    <a
-                      href={product.url}
-                      rel="noopener noreferrer sponsored nofollow"
-                      target="_blank"
-                    >
-                      View details
-                      <ArrowRightIcon data-icon="inline-end" />
-                    </a>
-                  </Button>
-                </TableCell>
+                  <div className="space-y-2">
+                    <p className="text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+                      Trade-offs
+                    </p>
+                    <ul className="grid gap-2 pl-4 text-sm leading-6 text-muted-foreground">
+                      {product.cons.map((con) => (
+                        <li key={con} className="list-disc">
+                          {con}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <Button asChild className="w-full justify-center" size="sm" variant="outline">
+                  <a
+                    href={product.url}
+                    rel="noopener noreferrer sponsored nofollow"
+                    target="_blank"
+                  >
+                    View details
+                    <ArrowRightIcon data-icon="inline-end" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden md:block">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="px-4 py-4">Product</TableHead>
+                <TableHead className="px-4 py-4">Best for</TableHead>
+                <TableHead className="px-4 py-4">Trade-offs</TableHead>
+                <TableHead className="px-4 py-4">Action</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {products.map((product) => (
+                <TableRow key={product.id}>
+                  <TableCell className="px-4 py-5 align-top whitespace-normal">
+                    <div className="flex flex-col gap-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant="secondary">{product.badge}</Badge>
+                        <Badge variant="outline">{product.priceLabel}</Badge>
+                      </div>
+                      <p className="font-medium text-foreground">{product.name}</p>
+                      <p className="leading-6 text-muted-foreground">{product.summary}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-5 align-top whitespace-normal text-muted-foreground">
+                    <ul className="flex flex-col gap-2">
+                      {product.pros.map((pro) => (
+                        <li key={pro}>{pro}</li>
+                      ))}
+                    </ul>
+                  </TableCell>
+                  <TableCell className="px-4 py-5 align-top whitespace-normal text-muted-foreground">
+                    <ul className="flex flex-col gap-2">
+                      {product.cons.map((con) => (
+                        <li key={con}>{con}</li>
+                      ))}
+                    </ul>
+                  </TableCell>
+                  <TableCell className="px-4 py-5 align-top whitespace-normal">
+                    <Button asChild size="sm" variant="outline">
+                      <a
+                        href={product.url}
+                        rel="noopener noreferrer sponsored nofollow"
+                        target="_blank"
+                      >
+                        View details
+                        <ArrowRightIcon data-icon="inline-end" />
+                      </a>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </CardContent>
     </Card>
   );

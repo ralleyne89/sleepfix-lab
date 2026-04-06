@@ -70,6 +70,8 @@ export interface CategoryMeta {
   description: string;
   focus: string;
   accent: string;
+  teaserImage: string;
+  teaserAlt: string;
   launchIdeas: string[];
 }
 
@@ -124,6 +126,8 @@ export const categoryMeta: Record<ArticleCategory, CategoryMeta> = {
       "Device reviews, lifestyle fixes, and plain-language explainers for adults trying to quiet the night without guesswork.",
     focus: "Commercial-intent product research with realistic sleep and airway context.",
     accent: "from-accent-soft/70 via-white to-rose/30",
+    teaserImage: "/covers/snoring-category.svg",
+    teaserAlt: "Editorial scene with a made bed, bedside lamp, and calm sleep setup for snoring coverage.",
     launchIdeas: [
       "Best anti-snoring mouthguards",
       "Does alcohol make snoring worse?",
@@ -137,6 +141,8 @@ export const categoryMeta: Record<ArticleCategory, CategoryMeta> = {
       "Evidence-aware habit guides, supplement explainers, and routines that support deeper and more consistent sleep.",
     focus: "Actionable behavior and supplement content for light sleepers and routine builders.",
     accent: "from-sand/45 via-white to-accent-soft/25",
+    teaserImage: "/covers/sleep-quality-category.svg",
+    teaserAlt: "Editorial scene with a supplement jar, notebook, and soft morning light for sleep quality stories.",
     launchIdeas: [
       "Magnesium glycinate for sleep",
       "Best bedtime routines",
@@ -150,6 +156,8 @@ export const categoryMeta: Record<ArticleCategory, CategoryMeta> = {
       "Thoughtful reviews of trackers, sound devices, pillows, and ambient gear that shape how a room feels at night.",
     focus: "High-AOV product discovery with practical setup advice and expectation setting.",
     accent: "from-accent-soft/60 via-white to-sand/30",
+    teaserImage: "/covers/sleep-products-category.svg",
+    teaserAlt: "Editorial scene with bedside sleep devices and a tracker arranged on a nightstand.",
     launchIdeas: [
       "Best sleep trackers under $100",
       "White noise machines that blend into a bedroom",
@@ -163,6 +171,8 @@ export const categoryMeta: Record<ArticleCategory, CategoryMeta> = {
       "Decision-ready matchups for readers choosing between two products with similar promises but different trade-offs.",
     focus: "Fast, comparison-first pages designed to convert high-intent searchers.",
     accent: "from-rose/30 via-white to-accent-soft/35",
+    teaserImage: "/covers/comparisons-category.svg",
+    teaserAlt: "Editorial comparison scene with a sleep ring and tracker displayed side by side.",
     launchIdeas: [
       "ZQuiet vs SnoreRx",
       "Oura Ring vs Fitbit for sleep",
@@ -176,6 +186,8 @@ export const categoryMeta: Record<ArticleCategory, CategoryMeta> = {
       "Long-form pillar articles that stitch together causes, protocols, product choices, and next-step resources.",
     focus: "Topical authority pages that support the rest of the internal linking system.",
     accent: "from-sand/40 via-white to-rose/18",
+    teaserImage: "/covers/guides-category.svg",
+    teaserAlt: "Editorial guide scene with a notebook, checklist, and warm desk lamp.",
     launchIdeas: [
       "Ultimate guide to stopping snoring",
       "How to fix your sleep schedule",

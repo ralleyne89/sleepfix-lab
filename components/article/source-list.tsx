@@ -7,9 +7,9 @@ interface SourceListProps {
 
 export function SourceList({ sources }: SourceListProps) {
   return (
-    <ol className="flex flex-col gap-4 text-sm leading-7 text-muted-foreground">
+    <ol className="flex flex-col gap-3 text-sm leading-6 text-muted-foreground sm:gap-4 sm:leading-7">
       {sources.map((source) => (
-        <li key={source.url} className="flex flex-col gap-4">
+        <li key={source.url} className="flex flex-col gap-3 sm:gap-4">
           <Separator />
           <a
             className="font-medium text-foreground underline decoration-border underline-offset-4 transition hover:text-primary"

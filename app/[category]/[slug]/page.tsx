@@ -23,7 +23,8 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { JsonLd } from "@/components/shared/json-ld";
 import { NewsletterCard } from "@/components/shared/newsletter-card";
-import { StoryRow } from "@/components/shared/story-row";
+import { SectionHeading } from "@/components/shared/section-heading";
+import { StoryCard } from "@/components/shared/story-card";
 import { StoryVisual } from "@/components/shared/story-visual";
 import { getArticleBySlug, getArticleStaticParams, getRelatedArticles } from "@/lib/content";
 import { renderArticleMdx } from "@/lib/mdx";
@@ -88,10 +89,10 @@ export default async function ArticlePage({
       <JsonLd data={buildFaqJsonLd(article)} />
       <JsonLd data={breadcrumbJsonLd} />
 
-      <div className="pb-24">
-        <div className="mx-auto w-full max-w-7xl px-5 pt-10 lg:px-8 lg:pt-12">
+      <div className="pb-16 sm:pb-20 lg:pb-24">
+        <div className="page-shell">
           <Breadcrumb>
-            <BreadcrumbList className="text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground">
+            <BreadcrumbList className="flex-wrap gap-y-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted-foreground sm:text-[0.72rem]">
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link href="/">Home</Link>
@@ -110,82 +111,88 @@ export default async function ArticlePage({
             </BreadcrumbList>
           </Breadcrumb>
 
-          <header className="mt-6 pt-8">
-            <Separator />
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(280px,1.15fr)] lg:items-start">
-              <div className="flex flex-col gap-5 pt-8">
-                <p className="eyebrow">{article.hero.eyebrow}</p>
-                <h1 className="font-serif text-5xl font-semibold leading-[0.93] tracking-[-0.07em] text-balance sm:text-6xl lg:text-[4.35rem]">
-                  {article.title}
-                </h1>
-                <p className="max-w-3xl text-xl leading-9 text-muted-foreground">{article.excerpt}</p>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge variant="secondary">{categoryMeta[article.category].title}</Badge>
-                  <Badge variant="outline">{article.readingMinutes} min read</Badge>
-                  <span className="text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground">
-                    Updated {formatDate(article.updatedAt)}
-                  </span>
-                </div>
-                <Alert>
-                  <AlertTitle>{article.hero.accent}</AlertTitle>
-                  <AlertDescription>{article.hero.mood}</AlertDescription>
-                </Alert>
+          <header className="motion-enter mt-4 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(17rem,20rem)] lg:items-start">
+            <div className="flex min-w-0 flex-col gap-4 sm:gap-5">
+              <p className="eyebrow">{article.hero.eyebrow}</p>
+              <h1 className="font-serif text-[2.1rem] font-semibold leading-[0.95] tracking-[-0.07em] text-balance sm:text-[3.2rem] lg:text-[3.8rem]">
+                {article.title}
+              </h1>
+              <p className="max-w-3xl text-sm leading-7 text-muted-foreground text-pretty sm:text-lg sm:leading-8">{article.excerpt}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary">{categoryMeta[article.category].title}</Badge>
+                <Badge variant="outline">{article.readingMinutes} min read</Badge>
+                <span className="hidden text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground sm:inline">
+                  Updated {formatDate(article.updatedAt)}
+                </span>
               </div>
+              <Alert>
+                <AlertTitle>{article.hero.accent}</AlertTitle>
+                <AlertDescription>{article.hero.mood}</AlertDescription>
+              </Alert>
+            </div>
 
-              <div className="pt-8">
-                <StoryVisual article={article} priority variant="lead" />
-              </div>
+            <div>
+              <StoryVisual article={article} priority variant="lead" />
             </div>
           </header>
 
-          <div className="mt-14 grid gap-14 lg:grid-cols-[minmax(0,1fr)_250px] lg:items-start">
-            <div className="flex flex-col gap-8">
-              <Alert>
-                <CircleAlertIcon />
-                <AlertTitle>Affiliate disclosure</AlertTitle>
-                <AlertDescription>
-                {siteConfig.legal.affiliate}
-                </AlertDescription>
-              </Alert>
-              <article className="article-prose">{renderedContent}</article>
-            </div>
+          <div className="section-block">
+            <Separator className="section-divider" />
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,18rem)] lg:items-start">
+              <div className="flex min-w-0 flex-col gap-5 sm:gap-6">
+                <Alert>
+                  <CircleAlertIcon />
+                  <AlertTitle>Affiliate disclosure</AlertTitle>
+                  <AlertDescription>
+                    {siteConfig.legal.affiliate}
+                  </AlertDescription>
+                </Alert>
+                <article className="article-prose">{renderedContent}</article>
+              </div>
 
-            <aside className="flex flex-col gap-8 lg:sticky lg:top-40 lg:self-start">
-              <Toc headings={article.headings} />
-              <NewsletterCard compact />
-            </aside>
+              <aside className="flex min-w-0 flex-col gap-4 sm:gap-5 lg:sticky lg:top-28 lg:self-start">
+                <Toc headings={article.headings} />
+                <NewsletterCard compact />
+              </aside>
+            </div>
           </div>
 
-          <section className="mt-14 pt-10">
-            <Separator />
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_320px]">
-              <div className="flex flex-col gap-5 pt-10">
-                <p className="eyebrow">Frequently asked questions</p>
-                <h2 className="font-serif text-4xl font-semibold tracking-[-0.06em] text-balance sm:text-5xl">
-                  Fast answers for readers who want the short version.
-                </h2>
+          <section className="section-block">
+            <Separator className="section-divider" />
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(18rem,21rem)] xl:items-start">
+              <div className="min-w-0 space-y-5">
+                <SectionHeading
+                  eyebrow="Frequently asked questions"
+                  title="Fast answers for readers who want the short version."
+                />
                 <FaqList items={article.faq} />
               </div>
-              <div className="flex flex-col gap-8 pt-10">
-                <div className="flex flex-col gap-5">
-                  <p className="text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">Sources</p>
-                  <h2 className="mt-3 font-serif text-3xl font-semibold tracking-[-0.05em] text-foreground">
-                    What informed this page
-                  </h2>
-                  <SourceList sources={article.sources} />
+              <div className="flex min-w-0 flex-col gap-5 sm:gap-6">
+                <div className="paper-panel rounded-[1.45rem] border-border/70 p-4 sm:rounded-[1.6rem] sm:p-5">
+                  <SectionHeading
+                    eyebrow="Sources"
+                    size="compact"
+                    title="What informed this page"
+                  />
+                  <div className="mt-5">
+                    <SourceList sources={article.sources} />
+                  </div>
                 </div>
                 <AuthorCard />
               </div>
             </div>
           </section>
 
-          <section className="mt-14 pt-10">
-            <Separator />
-            <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)]">
-              <div className="flex flex-col gap-4 pt-10">
-                <p className="eyebrow">Keep reading</p>
-                <p className="font-serif text-4xl font-semibold tracking-[-0.06em] text-balance sm:text-5xl">
-                  Related pages inside the same editorial system.
+          <section className="section-block">
+            <Separator className="section-divider" />
+            <div className="grid gap-6">
+              <SectionHeading
+                eyebrow="Keep reading"
+                title="Related pages inside the same editorial system."
+              />
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:leading-7">
+                  Related pages that keep the same editorial lens but widen the path from this article into adjacent decisions.
                 </p>
                 <Button asChild className="w-fit" size="sm" variant="link">
                   <Link href={`/${article.category}`}>
@@ -194,9 +201,9 @@ export default async function ArticlePage({
                   </Link>
                 </Button>
               </div>
-              <div className="pt-10">
+              <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                 {relatedArticles.map((relatedArticle) => (
-                  <StoryRow key={relatedArticle.url} article={relatedArticle} image="thumb" />
+                  <StoryCard key={relatedArticle.url} article={relatedArticle} />
                 ))}
               </div>
             </div>

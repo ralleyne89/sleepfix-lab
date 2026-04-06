@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import type { ArticleDocument } from "@/lib/content";
 import { categoryMeta } from "@/lib/site-config";
-import { cn, formatDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { StoryVisual } from "@/components/shared/story-visual";
 
 interface StoryRowProps {
@@ -32,14 +30,15 @@ export function StoryRow({
   return (
     <article
       className={cn(
-        "group flex flex-col gap-6 py-6",
-        image === "none" ? "" : "grid gap-6 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-start",
+        "group relative flex min-w-0 flex-col gap-3 py-4 sm:gap-4 sm:py-5",
+        image === "none"
+          ? ""
+          : "grid gap-3 sm:gap-4 md:grid-cols-[minmax(11rem,13rem)_minmax(0,1fr)] md:items-start lg:gap-5",
         className,
       )}
     >
-      <Separator />
       {image !== "none" ? (
-        <Link href={article.url}>
+        <Link className="min-w-0" href={article.url}>
           <StoryVisual
             article={article}
             className="w-full"
@@ -47,20 +46,20 @@ export function StoryRow({
           />
         </Link>
       ) : null}
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center gap-2">
-          {showCategory ? <Badge variant="secondary">{category.title}</Badge> : null}
-          <span className="text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground">
+      <div className="flex min-w-0 flex-col gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+          {showCategory ? <span>{category.title}</span> : null}
+          {showCategory ? <span className="h-1 w-1 rounded-full bg-border" /> : null}
+          <span className="text-[0.68rem] uppercase tracking-[0.16em] text-muted-foreground sm:text-[0.72rem]">
             {article.readingMinutes} min read
-          </span>
-          <span className="text-[0.72rem] uppercase tracking-[0.16em] text-muted-foreground">
-            Updated {formatDate(article.updatedAt)}
           </span>
         </div>
         <h3
           className={cn(
-            "font-serif font-semibold tracking-[-0.05em] text-balance",
-            titleSize === "large" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-[2.45rem]",
+            "max-w-4xl font-serif font-semibold leading-[1.02] tracking-[-0.055em] text-balance",
+            titleSize === "large"
+              ? "text-[1.55rem] sm:text-[2.15rem] lg:text-[2.45rem]"
+              : "text-[1.28rem] sm:text-[1.65rem]",
           )}
         >
           <Link className="transition hover:text-primary" href={article.url}>
@@ -68,16 +67,18 @@ export function StoryRow({
           </Link>
         </h3>
         {showExcerpt ? (
-          <p className="max-w-3xl text-[1.02rem] leading-8 text-muted-foreground">
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground text-pretty sm:text-base sm:leading-7">
             {article.excerpt}
           </p>
         ) : null}
-        <Button asChild className="w-fit" size="sm" variant="link">
-          <Link href={article.url}>
-            {ctaLabel}
-            <ArrowRightIcon data-icon="inline-end" />
-          </Link>
-        </Button>
+        <div className="flex flex-wrap items-center gap-2.5 pt-0.5 sm:gap-3">
+          <Button asChild className="w-fit px-0" size="sm" variant="link">
+            <Link href={article.url}>
+              {ctaLabel}
+              <ArrowRightIcon data-icon="inline-end" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </article>
   );

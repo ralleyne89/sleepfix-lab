@@ -23,15 +23,14 @@ describe("content model", () => {
     }
   });
 
-  it("exposes a valid homepage curation model with mixed cover-image support", () => {
+  it("exposes a valid homepage curation model with image-ready editorial coverage", () => {
     const { leadArticle, secondaryArticles, sections } = getHomepageEditorialContent();
     const articles = getAllArticles();
 
     expect(leadArticle.slug).toBe(homepageEditorial.leadArticleSlug);
     expect(secondaryArticles).toHaveLength(2);
     expect(sections).toHaveLength(homepageEditorial.homepageSectionOrder.length);
-    expect(articles.some((article) => Boolean(article.coverImage))).toBe(true);
-    expect(articles.some((article) => !article.coverImage)).toBe(true);
+    expect(articles.every((article) => Boolean(article.coverImage))).toBe(true);
   });
 
   it("exposes the expected static params for categories and articles", () => {

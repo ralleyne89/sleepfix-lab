@@ -41,7 +41,7 @@ export function AffiliateCTA({
             <Badge variant="outline">{product.badge}</Badge>
             <Badge variant="outline">{product.priceLabel}</Badge>
           </div>
-          <CardTitle className="text-3xl tracking-[-0.05em]">
+          <CardTitle className="text-2xl tracking-[-0.05em] sm:text-3xl">
             {product.name}
           </CardTitle>
         </CardHeader>
@@ -58,7 +58,7 @@ export function AffiliateCTA({
           </div>
         </CardContent>
         <CardFooter className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <Button asChild>
+          <Button asChild className="w-full justify-center sm:w-auto">
             <a
               href={product.url}
               rel="noopener noreferrer sponsored nofollow"

@@ -10,7 +10,7 @@ describe("public routes", () => {
   it("renders the home page hero and featured reading section", () => {
     const markup = renderToStaticMarkup(<HomePage />);
 
-    expect(markup).toContain("Sleep guidance with the pacing of a good magazine");
+    expect(markup).toContain("Sleep guidance for people who want a better night");
     expect(markup).toContain("Featured reading");
   });
 

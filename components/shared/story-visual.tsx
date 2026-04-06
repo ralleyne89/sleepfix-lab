@@ -2,8 +2,6 @@ import Image from "next/image";
 import type { ArticleDocument } from "@/lib/content";
 import { categoryMeta } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 
 interface StoryVisualProps {
   article: ArticleDocument;
@@ -13,9 +11,9 @@ interface StoryVisualProps {
 }
 
 const variantClasses: Record<NonNullable<StoryVisualProps["variant"]>, string> = {
-  lead: "aspect-[6/5]",
-  row: "aspect-[4/3]",
-  thumb: "aspect-[5/4]",
+  lead: "aspect-[7/5] sm:aspect-[6/5] lg:aspect-[5/4]",
+  row: "aspect-[3/2] sm:aspect-[5/4] lg:aspect-[4/3]",
+  thumb: "aspect-[3/2] sm:aspect-[5/4]",
 };
 
 export function StoryVisual({
@@ -25,63 +23,51 @@ export function StoryVisual({
   variant = "row",
 }: StoryVisualProps) {
   const category = categoryMeta[article.category];
-  const alt = article.coverAlt ?? `${article.title} cover art`;
-
-  if (article.coverImage) {
-    return (
-      <Card
-        className={cn(
-          "relative overflow-hidden border-border/80 bg-card/82 py-0 shadow-[0_14px_36px_rgba(39,30,25,0.06)]",
-          variantClasses[variant],
-          className,
-        )}
-      >
-        <Image
-          alt={alt}
-          className="object-cover transition duration-500 group-hover:scale-[1.02]"
-          fill
-          priority={priority}
-          sizes={
-            variant === "lead"
-              ? "(min-width: 1024px) 50vw, 100vw"
-              : "(min-width: 1024px) 22rem, 100vw"
-          }
-          src={article.coverImage}
-        />
-      </Card>
-    );
-  }
+  const imageSrc = article.coverImage ?? category.teaserImage;
+  const alt = article.coverAlt ?? category.teaserAlt ?? `${article.title} cover art`;
 
   return (
-    <Card
+    <div
       className={cn(
-        "relative overflow-hidden border-border/80 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--card)_92%,white_8%),color-mix(in_oklab,var(--secondary)_78%,white_22%))] p-6 shadow-[0_14px_36px_rgba(39,30,25,0.06)]",
+        "relative isolate min-w-0 overflow-hidden rounded-[1.6rem] border border-border/70 bg-[color:var(--night)] shadow-[0_18px_46px_rgba(24,22,19,0.14)]",
         variantClasses[variant],
         className,
       )}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(16,13,10,0.03))]" />
-      <div className="absolute inset-x-6 top-6 h-px bg-[rgba(24,20,17,0.14)]" />
-      <div className="absolute bottom-6 right-6 h-24 w-24 rounded-full border border-[rgba(24,20,17,0.09)]" />
-      <div className="absolute bottom-12 right-12 h-10 w-10 rounded-full bg-[rgba(180,140,102,0.22)]" />
-      <div className="relative flex h-full flex-col justify-between">
-        <Badge className="w-fit" variant="secondary">
+      <Image
+        alt={alt}
+        className="object-cover transition duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+        fill
+        priority={priority}
+        sizes={
+          variant === "lead"
+            ? "(min-width: 1024px) 50vw, 100vw"
+            : "(min-width: 1024px) 24rem, 100vw"
+        }
+        src={imageSrc}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(250,246,240,0.08),transparent_30%,rgba(16,20,28,0.7))]" />
+      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-28", category.accent)} />
+      <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-3 sm:inset-x-5 sm:top-5">
+        <span className="rounded-full border border-white/14 bg-[rgba(250,246,240,0.14)] px-3 py-1 text-[0.62rem] uppercase tracking-[0.18em] text-[rgba(247,241,231,0.94)] backdrop-blur-sm sm:text-[0.66rem]">
           {category.title}
-        </Badge>
-        <div className="flex flex-col gap-3">
-          <p className="text-sm uppercase tracking-[0.16em] text-muted-foreground">
-            SleepFix Editorial
-          </p>
-          <p
-            className={cn(
-              "max-w-sm font-serif font-semibold tracking-[-0.05em] text-foreground",
-              variant === "lead" ? "text-4xl sm:text-5xl" : "text-3xl",
-            )}
-          >
+        </span>
+        {variant !== "thumb" ? (
+          <span className="hidden text-[0.62rem] uppercase tracking-[0.22em] text-[rgba(247,241,231,0.72)] sm:inline">
+            SleepFix Lab
+          </span>
+        ) : null}
+      </div>
+      <div className="absolute inset-x-4 bottom-4 flex flex-col gap-1.5 sm:inset-x-5 sm:bottom-5 sm:gap-2">
+        <p className="max-w-md text-[0.62rem] uppercase tracking-[0.18em] text-[rgba(247,241,231,0.76)] sm:text-[0.68rem]">
+          {variant === "lead" ? article.hero.accent : article.hero.eyebrow}
+        </p>
+        {variant === "lead" ? (
+          <p className="max-w-md font-serif text-[1.6rem] font-semibold leading-[1.02] tracking-[-0.05em] text-[rgba(250,245,237,0.96)] sm:text-3xl">
             {article.title}
           </p>
-        </div>
+        ) : null}
       </div>
-    </Card>
+    </div>
   );
 }

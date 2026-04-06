@@ -1,12 +1,6 @@
 import type { ReactNode } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { SectionHeading } from "@/components/shared/section-heading";
 
 interface UtilityPageShellProps {
   eyebrow: string;
@@ -22,22 +16,18 @@ export function UtilityPageShell({
   children,
 }: UtilityPageShellProps) {
   return (
-    <div className="mx-auto max-w-5xl px-5 py-10 lg:px-8">
-      <Card className="bg-card/88">
-        <CardHeader className="flex flex-col gap-4">
-          <p className="eyebrow">{eyebrow}</p>
-          <CardTitle className="text-5xl tracking-[-0.06em] text-balance sm:text-6xl">
-            {title}
-          </CardTitle>
-          {description ? (
-            <CardDescription className="max-w-3xl text-base leading-8">
-              {description}
-            </CardDescription>
-          ) : null}
-        </CardHeader>
+    <div className="page-shell">
+      <div className="paper-panel mx-auto max-w-4xl rounded-[1.5rem] border-border/70 px-4 py-4 sm:px-6 sm:py-5 lg:px-8 lg:py-8">
+        <SectionHeading
+          as="h1"
+          body={description}
+          eyebrow={eyebrow}
+          size="page"
+          title={title}
+        />
         <Separator />
-        <CardContent className="pt-8">{children}</CardContent>
-      </Card>
+        <div className="pt-5 sm:pt-6 lg:pt-8">{children}</div>
+      </div>
     </div>
   );
 }

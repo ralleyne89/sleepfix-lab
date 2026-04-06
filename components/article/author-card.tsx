@@ -14,16 +14,16 @@ import {
 export function AuthorCard() {
   return (
     <Card className="bg-card/84">
-      <CardHeader className="flex flex-col gap-4">
+      <CardHeader className="flex flex-col gap-3.5">
         <p className="text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
           Editorial profile
         </p>
-        <div className="flex items-center gap-4">
-          <Avatar className="size-14">
+        <div className="flex items-center gap-3.5 sm:gap-4">
+          <Avatar className="size-12 sm:size-14">
             <AvatarFallback>SL</AvatarFallback>
           </Avatar>
           <div className="flex flex-col gap-1">
-            <CardTitle className="text-3xl tracking-[-0.05em]">
+            <CardTitle className="text-[1.55rem] tracking-[-0.05em] sm:text-3xl">
               {siteConfig.author.name}
             </CardTitle>
             <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
@@ -32,13 +32,17 @@ export function AuthorCard() {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-5">
-        <p className="text-base leading-8 text-muted-foreground">
+      <CardContent className="flex flex-col gap-4">
+        <p className="text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
           {siteConfig.author.bio}
         </p>
         <div className="flex flex-wrap gap-2">
           {siteConfig.author.credentials.map((item) => (
-            <Badge key={item} variant="outline">
+            <Badge
+              key={item}
+              className="h-auto max-w-full whitespace-normal px-3 py-1 text-center leading-5 tracking-[0.14em]"
+              variant="outline"
+            >
               {item}
             </Badge>
           ))}

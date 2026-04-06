@@ -1,0 +1,28 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="162" y1="96" x2="1432" y2="1090" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F0E5"/>
+      <stop offset="0.62" stop-color="#E6D8C8"/>
+      <stop offset="1" stop-color="#CDB8A2"/>
+    </linearGradient>
+    <linearGradient id="pedestal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FBF8F2"/>
+      <stop offset="1" stop-color="#D9C6B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" rx="60" fill="url(#bg)"/>
+  <circle cx="288" cy="218" r="156" fill="#FFFFFF" fill-opacity="0.34"/>
+  <circle cx="1282" cy="220" r="132" fill="#DAC7B2" fill-opacity="0.42"/>
+  <rect x="282" y="754" width="1036" height="162" rx="48" fill="url(#pedestal)"/>
+  <rect x="418" y="474" width="306" height="294" rx="54" fill="#F1E5D6"/>
+  <circle cx="572" cy="596" r="98" fill="#FAF6EE"/>
+  <path d="M572 494C626 494 670 538 670 592C670 646 626 690 572 690C518 690 474 646 474 592C474 538 518 494 572 494Z" stroke="#5C7285" stroke-width="20"/>
+  <rect x="876" y="430" width="282" height="338" rx="72" fill="#556B7E"/>
+  <rect x="960" y="492" width="114" height="210" rx="34" fill="#F8F3EB"/>
+  <circle cx="1018" cy="456" r="28" fill="#EFE2D1"/>
+  <path d="M1018 536V598" stroke="#C89D65" stroke-width="10" stroke-linecap="round"/>
+  <path d="M1018 618V660" stroke="#D9C6AF" stroke-width="10" stroke-linecap="round"/>
+  <path d="M804 312C880 258 1010 264 1082 326" stroke="#E9C99D" stroke-width="22" stroke-linecap="round"/>
+  <path d="M338 372C408 324 532 326 594 386" stroke="#F8F0E2" stroke-width="20" stroke-linecap="round" opacity="0.76"/>
+  <rect x="644" y="584" width="306" height="28" rx="14" fill="#E6D7C5"/>
+</svg>
